@@ -1,0 +1,34 @@
+From 1514f80d36fb7d74ca084f5153694f8487d54916 Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Sun, 1 May 2022 21:12:19 +0800
+Subject: [PATCH 6/9] use $(TARGET_VENDOR) in device tree path
+
+---
+ common/config/Android.mk | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/common/config/Android.mk b/common/config/Android.mk
+index 64caff03..934825c7 100755
+--- a/common/config/Android.mk
++++ b/common/config/Android.mk
+@@ -19,7 +19,7 @@ include build/core/copy_headers.mk
+ # Copy public.libraries.txt to /system/vendor/etc
+ #----------------------------------------------------------------------
+ $(shell mkdir -p $(TARGET_OUT_VENDOR_ETC))
+-$(shell cat device/qcom/$(TARGET_PRODUCT)/public.libraries.vendor.txt > $(TARGET_OUT_VENDOR_ETC)/public.libraries.txt)
++$(shell cat device/$(TARGET_VENDOR)/$(TARGET_PRODUCT)/public.libraries.vendor.txt > $(TARGET_OUT_VENDOR_ETC)/public.libraries.txt)
+ ifeq ($(TARGET_SUPPORTS_ANDROID_WEAR),true)
+ $(shell cat $(QC_PROP_ROOT)/common/config/public.libraries.wearable.txt >> $(TARGET_OUT_VENDOR_ETC)/public.libraries.txt)
+ else
+@@ -30,7 +30,7 @@ endif
+ #----------------------------------------------------------------------
+ # Copy public.libraries-qti.txt to /system/etc
+ #----------------------------------------------------------------------
+-$(shell cat device/qcom/$(TARGET_PRODUCT)/public.libraries-qti.txt > $(TARGET_OUT_ETC)/public.libraries-qti.txt)
++$(shell cat device/$(TARGET_VENDOR)/$(TARGET_PRODUCT)/public.libraries-qti.txt > $(TARGET_OUT_ETC)/public.libraries-qti.txt)
+ $(shell cat $(QC_PROP_ROOT)/common/config/public.libraries-qti.txt >> $(TARGET_OUT_ETC)/public.libraries-qti.txt)
+ #----------------------------------------------------------------------
+ 
+-- 
+2.30.2
+

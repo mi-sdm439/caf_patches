@@ -1,0 +1,78 @@
+From e7c3d698afc43165406e1e9da53728a20dcec7cc Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Mon, 2 May 2022 18:55:32 +0800
+Subject: [PATCH 2/2] Revert "QCamera2:HAL3: Added metadata tag for sync
+ between two sessions"
+
+This reverts commit 92d337f671fe39adbb013de2affe12db6dbd5968.
+---
+ QCamera2/HAL3/QCamera3HWI.cpp     | 7 -------
+ QCamera2/HAL3/QCamera3HWI.h       | 1 -
+ QCamera2/stack/common/cam_intf.h  | 1 -
+ QCamera2/stack/common/cam_types.h | 1 -
+ 4 files changed, 10 deletions(-)
+
+diff --git a/QCamera2/HAL3/QCamera3HWI.cpp b/QCamera2/HAL3/QCamera3HWI.cpp
+index ea1bc48be..977f44d7b 100644
+--- a/QCamera2/HAL3/QCamera3HWI.cpp
++++ b/QCamera2/HAL3/QCamera3HWI.cpp
+@@ -627,8 +627,6 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
+     mSessionId = 0;
+     mHFRMode = CAM_HFR_MODE_OFF;
+ #endif
+-    sync_counter =0;
+-
+ }
+ 
+ /*===========================================================================
+@@ -8824,11 +8822,6 @@ no_error:
+ 
+             if(!IS_MULTI_CAMERA)
+             {
+-               if(isDualCamera() && gCamCapability[mCameraId]->version == CAM_HAL_V3) {
+-                 sync_counter++;
+-                 ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters,CAM_INTF_PARAM_COUNTER,sync_counter);
+-                 ADD_SET_PARAM_ENTRY_TO_BATCH(mAuxParameters,CAM_INTF_PARAM_COUNTER,sync_counter);
+-               }
+                 rc = mCameraHandle->ops->set_parms(
+                         get_main_camera_handle(mCameraHandle->camera_handle), mParameters);
+                 if (rc < 0) {
+diff --git a/QCamera2/HAL3/QCamera3HWI.h b/QCamera2/HAL3/QCamera3HWI.h
+index fba01bfca..6dbfeb740 100644
+--- a/QCamera2/HAL3/QCamera3HWI.h
++++ b/QCamera2/HAL3/QCamera3HWI.h
+@@ -885,7 +885,6 @@ private:
+     camera3_capture_request_t **quad_req;
+     bool m_bRecoveryDone;
+     CameraMetadata mSavedParams;
+-    uint32_t sync_counter;
+ };
+ 
+ }; // namespace qcamera
+diff --git a/QCamera2/stack/common/cam_intf.h b/QCamera2/stack/common/cam_intf.h
+index e28272bc5..002a19cf0 100644
+--- a/QCamera2/stack/common/cam_intf.h
++++ b/QCamera2/stack/common/cam_intf.h
+@@ -1203,7 +1203,6 @@ typedef struct {
+     INCLUDE(CAM_INTF_META_TUNING_PARAMS,                tuning_params_t,             1);
+     INCLUDE(CAM_INTF_PARM_CLOSE_HINT,                   uint8_t,                     1);
+     INCLUDE(CAM_INTF_META_SEND_IMMEDIATELY,             uint8_t,                     1);
+-    INCLUDE(CAM_INTF_PARAM_COUNTER,                     uint32_t,                    1);
+ } metadata_data_t;
+ 
+ /* Update clear_metadata_buffer() function when a new is_xxx_valid is added to
+diff --git a/QCamera2/stack/common/cam_types.h b/QCamera2/stack/common/cam_types.h
+index 329d37609..08becc507 100644
+--- a/QCamera2/stack/common/cam_types.h
++++ b/QCamera2/stack/common/cam_types.h
+@@ -2541,7 +2541,6 @@ typedef enum {
+     CAM_INTF_META_TUNING_PARAMS,
+     CAM_INTF_PARM_CLOSE_HINT,
+     CAM_INTF_META_SEND_IMMEDIATELY,
+-    CAM_INTF_PARAM_COUNTER,
+     CAM_INTF_PARM_MAX
+ } cam_intf_parm_type_t;
+ 
+-- 
+2.30.2
+

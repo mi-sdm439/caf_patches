@@ -1,0 +1,25 @@
+From 738d871ce450c2974ede1b86484f49a63aecb6f9 Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Mon, 2 May 2022 04:36:10 +0800
+Subject: [PATCH 8/9] nuke hbtpdbg either
+
+---
+ common/config/device-vendor.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/config/device-vendor.mk b/common/config/device-vendor.mk
+index 83b5db9f..71e66349 100755
+--- a/common/config/device-vendor.mk
++++ b/common/config/device-vendor.mk
+@@ -4423,7 +4423,7 @@ PRODUCT_PACKAGES_DEBUG += $(DATA_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(DIAG_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(FM_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(GPS_DBG)
+-PRODUCT_PACKAGES_DEBUG += $(HBTP_DBG)
++#PRODUCT_PACKAGES_DEBUG += $(HBTP_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(HY11_HY22_diff_debug)
+ PRODUCT_PACKAGES_DEBUG += $(IMS_RCS_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(KERNEL_TEST_DBG)
+-- 
+2.30.2
+

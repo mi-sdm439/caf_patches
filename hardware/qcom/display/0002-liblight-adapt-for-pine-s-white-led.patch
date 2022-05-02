@@ -1,0 +1,105 @@
+From c0398824efab3b9ab186a80d0876bfdc75627390 Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Mon, 2 May 2022 17:17:22 +0800
+Subject: [PATCH 2/2] liblight: adapt for pine's white led
+
+---
+ liblight/lights.c | 42 +++++-------------------------------------
+ 1 file changed, 5 insertions(+), 37 deletions(-)
+
+diff --git a/liblight/lights.c b/liblight/lights.c
+index 1b60ae553..ddd5d4cf4 100644
+--- a/liblight/lights.c
++++ b/liblight/lights.c
+@@ -47,15 +47,9 @@ static struct light_state_t g_battery;
+ static int g_last_backlight_mode = BRIGHTNESS_MODE_USER;
+ static int g_attention = 0;
+ 
+-char const*const RED_LED_FILE
++char const*const WHITE_LED_FILE
+         = "/sys/class/leds/red/brightness";
+ 
+-char const*const GREEN_LED_FILE
+-        = "/sys/class/leds/green/brightness";
+-
+-char const*const BLUE_LED_FILE
+-        = "/sys/class/leds/blue/brightness";
+-
+ char const*const LCD_FILE
+         = "/sys/class/leds/lcd-backlight/brightness";
+ 
+@@ -65,15 +59,9 @@ char const*const LCD_FILE2
+ char const*const BUTTON_FILE
+         = "/sys/class/leds/button-backlight/brightness";
+ 
+-char const*const RED_BLINK_FILE
++char const*const WHITE_BLINK_FILE
+         = "/sys/class/leds/red/blink";
+ 
+-char const*const GREEN_BLINK_FILE
+-        = "/sys/class/leds/green/blink";
+-
+-char const*const BLUE_BLINK_FILE
+-        = "/sys/class/leds/blue/blink";
+-
+ char const*const PERSISTENCE_FILE
+         = "/sys/class/graphics/fb0/msm_fb_persist_mode";
+ 
+@@ -167,10 +155,8 @@ static int
+ set_speaker_light_locked(struct light_device_t* dev,
+         struct light_state_t const* state)
+ {
+-    int red, green, blue;
+     int blink;
+     int onMS, offMS;
+-    unsigned int colorRGB;
+ 
+     if(!dev) {
+         return -1;
+@@ -188,17 +174,11 @@ set_speaker_light_locked(struct light_device_t* dev,
+             break;
+     }
+ 
+-    colorRGB = state->color;
+-
+ #if 0
+     ALOGD("set_speaker_light_locked mode %d, colorRGB=%08X, onMS=%d, offMS=%d\n",
+             state->flashMode, colorRGB, onMS, offMS);
+ #endif
+ 
+-    red = (colorRGB >> 16) & 0xFF;
+-    green = (colorRGB >> 8) & 0xFF;
+-    blue = colorRGB & 0xFF;
+-
+     if (onMS > 0 && offMS > 0) {
+         /*
+          * if ON time == OFF time
+@@ -215,22 +195,10 @@ set_speaker_light_locked(struct light_device_t* dev,
+     }
+ 
+     if (blink) {
+-        if (red) {
+-            if (write_int(RED_BLINK_FILE, blink))
+-                write_int(RED_LED_FILE, 0);
+-        }
+-        if (green) {
+-            if (write_int(GREEN_BLINK_FILE, blink))
+-                write_int(GREEN_LED_FILE, 0);
+-        }
+-        if (blue) {
+-            if (write_int(BLUE_BLINK_FILE, blink))
+-                write_int(BLUE_LED_FILE, 0);
+-        }
++        if (write_int(WHITE_BLINK_FILE, blink))
++            write_int(WHITE_LED_FILE, 0);
+     } else {
+-        write_int(RED_LED_FILE, red);
+-        write_int(GREEN_LED_FILE, green);
+-        write_int(BLUE_LED_FILE, blue);
++        write_int(WHITE_LED_FILE, rgb_to_brightness(state));
+     }
+ 
+     return 0;
+-- 
+2.30.2
+

@@ -1,0 +1,24 @@
+From 5d0ed583ed125ec2ac7ac86a75241ff9a0a08a25 Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Sun, 1 May 2022 16:39:09 +0800
+Subject: [PATCH 5/9] remove default thermal-engine config
+
+---
+ common/config/device-vendor.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/common/config/device-vendor.mk b/common/config/device-vendor.mk
+index c8c31782..83b5db9f 100755
+--- a/common/config/device-vendor.mk
++++ b/common/config/device-vendor.mk
+@@ -3339,7 +3339,6 @@ THERMAL += thermald-8x25-msm2-msm_therm.conf
+ #THERMAL-ENGINE
+ THERMAL-ENGINE := thermal-engine
+ THERMAL-ENGINE += libthermalclient
+-THERMAL-ENGINE += thermal-engine.conf
+ THERMAL-ENGINE += thermal-engine-8960.conf
+ THERMAL-ENGINE += thermal-engine-8064.conf
+ THERMAL-ENGINE += thermal-engine-8064ab.conf
+-- 
+2.30.2
+

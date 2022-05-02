@@ -1,0 +1,84 @@
+From 8875c883a86b6ece41e56442ce04ede506ffa207 Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Mon, 2 May 2022 05:12:07 +0800
+Subject: [PATCH 9/9] guard camera components with TARGET_USES_OSS_CAMERA
+
+---
+ common/config/device-vendor.mk | 6 ++++++
+ mm-camera/Android.mk           | 2 ++
+ mm-camerasdk/Android.mk        | 2 ++
+ 3 files changed, 10 insertions(+)
+
+diff --git a/common/config/device-vendor.mk b/common/config/device-vendor.mk
+index 71e66349..9d9047bc 100755
+--- a/common/config/device-vendor.mk
++++ b/common/config/device-vendor.mk
+@@ -1011,6 +1011,7 @@ HY11_HY22_diff += libevent_observer
+ HY11_HY22_diff += libimsmedia_jni
+ HY11_HY22_diff += libwbc_jni
+ HY11_HY22_diff += libqti-iop
++ifeq ($(TARGET_USES_OSS_CAMERA),true)
+ HY11_HY22_diff += libmmcamera2_c2d_module
+ HY11_HY22_diff += libmmcamera2_cpp_module
+ HY11_HY22_diff += libmmcamera2_iface_modules
+@@ -1026,6 +1027,7 @@ HY11_HY22_diff += libmmcamera_ppbase_module
+ HY11_HY22_diff += libmmcamera_sw2d_lib
+ HY11_HY22_diff += libmmcamera_thread_services
+ HY11_HY22_diff += libmmcamera_tuning_lookup
++endif
+ HY11_HY22_diff += libqdi
+ HY11_HY22_diff += libqdp
+ HY11_HY22_diff += libqmi_client_qmux
+@@ -3933,7 +3935,9 @@ PRODUCT_PACKAGES += $(MARE)
+ PRODUCT_PACKAGES += $(MDM_HELPER)
+ PRODUCT_PACKAGES += $(MDM_HELPER_PROXY)
+ PRODUCT_PACKAGES += $(MM_AUDIO)
++ifeq ($(TARGET_USES_OSS_CAMERA),true)
+ PRODUCT_PACKAGES += $(MM_CAMERA)
++endif
+ PRODUCT_PACKAGES += $(MM_CORE)
+ PRODUCT_PACKAGES += $(MM_COLOR_CONVERSION)
+ PRODUCT_PACKAGES += $(MM_COLOR_CONVERTOR)
+@@ -4429,7 +4433,9 @@ PRODUCT_PACKAGES_DEBUG += $(IMS_RCS_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(KERNEL_TEST_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(KS_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(MM_AUDIO_DBG)
++ifeq ($(TARGET_USES_OSS_CAMERA),true)
+ PRODUCT_PACKAGES_DEBUG += $(MM_CAMERA_DBG)
++endif
+ PRODUCT_PACKAGES_DEBUG += $(MM_CORE_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(MM_VIDEO_DBG)
+ PRODUCT_PACKAGES_DEBUG += $(PERFDUMP_APP_DBG)
+diff --git a/mm-camera/Android.mk b/mm-camera/Android.mk
+index f4d4e1e8..63e4ec4d 100755
+--- a/mm-camera/Android.mk
++++ b/mm-camera/Android.mk
+@@ -1,3 +1,4 @@
++ifeq ($(TARGET_USES_OSS_CAMERA),true)
+ ifneq ($(TARGET_PRODUCT),qssi)
+ ifneq ($(TARGET_PRODUCT),qssi_32)
+ ifneq ($(strip $(USE_CAMERA_STUB)),true)
+@@ -350,3 +351,4 @@ endif #COMPILE_CAMERA
+ SDCLANG_FLAG_DEFS :=
+ endif
+ endif
++endif
+diff --git a/mm-camerasdk/Android.mk b/mm-camerasdk/Android.mk
+index ccece02c..90f29fe3 100755
+--- a/mm-camerasdk/Android.mk
++++ b/mm-camerasdk/Android.mk
+@@ -1,5 +1,6 @@
+ LOCAL_HEADER_LIBRARIES := libutils_headers
+ 
++ifeq ($(TARGET_USES_OSS_CAMERA),true)
+ ifneq ($(TARGET_PRODUCT),qssi)
+ ifneq ($(TARGET_PRODUCT),qssi_32)
+ ifneq ($(strip $(USE_CAMERA_STUB)),true)
+@@ -9,3 +10,4 @@ endif
+ endif #!USE_CAMERA_STUB
+ endif
+ endif
++endif
+-- 
+2.30.2
+

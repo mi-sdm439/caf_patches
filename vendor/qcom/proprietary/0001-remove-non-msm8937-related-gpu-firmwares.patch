@@ -1,0 +1,121 @@
+From ffb8980f57b04c939708619b0cc91985cfbecc7a Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Sun, 1 May 2022 15:49:37 +0800
+Subject: [PATCH 1/9] remove non msm8937 related gpu firmwares
+
+---
+ common/config/device-vendor.mk | 89 ----------------------------------
+ 1 file changed, 89 deletions(-)
+
+diff --git a/common/config/device-vendor.mk b/common/config/device-vendor.mk
+index cf8e5c48..2a0c6a9a 100755
+--- a/common/config/device-vendor.mk
++++ b/common/config/device-vendor.mk
+@@ -4149,104 +4149,15 @@ MM_GESTURES += libmmgesture-service
+ MM_GESTURES += mm-gesture-daemon
+ 
+ #MM_GRAPHICS
+-MM_GRAPHICS := a225_pfp.fw
+-MM_GRAPHICS += a225_pm4.fw
+-MM_GRAPHICS += a225p5_pm4.fw
+ MM_GRAPHICS += a300_pfp.fw
+ MM_GRAPHICS += a300_pm4.fw
+-MM_GRAPHICS += a330_pfp.fw
+-MM_GRAPHICS += a330_pm4.fw
+-MM_GRAPHICS += a420_pfp.fw
+-MM_GRAPHICS += a420_pm4.fw
+ MM_GRAPHICS += a530_pfp.fw
+ MM_GRAPHICS += a530_pm4.fw
+-MM_GRAPHICS += a530v1_pfp.fw
+-MM_GRAPHICS += a530v1_pm4.fw
+-MM_GRAPHICS += a530_gpmu.fw2
+-MM_GRAPHICS += a530v2_seq.fw2
+-MM_GRAPHICS += a530v3_gpmu.fw2
+-MM_GRAPHICS += a530v3_seq.fw2
+-MM_GRAPHICS += a530_zap.b00
+-MM_GRAPHICS += a530_zap.b01
+-MM_GRAPHICS += a530_zap.b02
+-MM_GRAPHICS += a530_zap.mdt
+-MM_GRAPHICS += a530_zap.elf
+-MM_GRAPHICS += a540_zap.b00
+-MM_GRAPHICS += a540_zap.b01
+-MM_GRAPHICS += a540_zap.b02
+-MM_GRAPHICS += a540_zap.mdt
+-MM_GRAPHICS += a540_zap.elf
+-MM_GRAPHICS += a512_zap.b00
+-MM_GRAPHICS += a512_zap.b01
+-MM_GRAPHICS += a512_zap.b02
+-MM_GRAPHICS += a512_zap.mdt
+-MM_GRAPHICS += a512_zap.elf
+-MM_GRAPHICS += a508_zap.b00
+-MM_GRAPHICS += a508_zap.b01
+-MM_GRAPHICS += a508_zap.b02
+-MM_GRAPHICS += a508_zap.mdt
+-MM_GRAPHICS += a508_zap.elf
+ MM_GRAPHICS += a506_zap.b00
+ MM_GRAPHICS += a506_zap.b01
+ MM_GRAPHICS += a506_zap.b02
+ MM_GRAPHICS += a506_zap.mdt
+ MM_GRAPHICS += a506_zap.elf
+-MM_GRAPHICS += a540_gpmu.fw2
+-MM_GRAPHICS += a630_sqe.fw
+-MM_GRAPHICS += a630_gmu.bin
+-MM_GRAPHICS += a630_zap.b00
+-MM_GRAPHICS += a630_zap.b01
+-MM_GRAPHICS += a630_zap.b02
+-MM_GRAPHICS += a630_zap.elf
+-MM_GRAPHICS += a630_zap.mdt
+-MM_GRAPHICS += a640_gmu.bin
+-MM_GRAPHICS += a640_zap.b00
+-MM_GRAPHICS += a640_zap.b01
+-MM_GRAPHICS += a640_zap.b02
+-MM_GRAPHICS += a640_zap.elf
+-MM_GRAPHICS += a640_zap.mdt
+-MM_GRAPHICS += a650_sqe.fw
+-MM_GRAPHICS += a650_gmu.bin
+-MM_GRAPHICS += a650_zap.b00
+-MM_GRAPHICS += a650_zap.b01
+-MM_GRAPHICS += a650_zap.b02
+-MM_GRAPHICS += a650_zap.elf
+-MM_GRAPHICS += a650_zap.mdt
+-MM_GRAPHICS += a620_zap.b00
+-MM_GRAPHICS += a620_zap.b01
+-MM_GRAPHICS += a620_zap.b02
+-MM_GRAPHICS += a620_zap.elf
+-MM_GRAPHICS += a620_zap.mdt
+-MM_GRAPHICS += a618_gmu.bin
+-MM_GRAPHICS += a619_gmu.bin
+-MM_GRAPHICS += a615_zap.b00
+-MM_GRAPHICS += a615_zap.b01
+-MM_GRAPHICS += a615_zap.b02
+-MM_GRAPHICS += a615_zap.elf
+-MM_GRAPHICS += a615_zap.mdt
+-MM_GRAPHICS += a608_rgmu.bin
+-MM_GRAPHICS += a608_zap.b00
+-MM_GRAPHICS += a608_zap.b01
+-MM_GRAPHICS += a608_zap.b02
+-MM_GRAPHICS += a608_zap.elf
+-MM_GRAPHICS += a608_zap.mdt
+-MM_GRAPHICS += a610_zap.b00
+-MM_GRAPHICS += a610_zap.b01
+-MM_GRAPHICS += a610_zap.b02
+-MM_GRAPHICS += a610_zap.elf
+-MM_GRAPHICS += a610_zap.mdt
+-MM_GRAPHICS += a702_sqe.fw
+-MM_GRAPHICS += a702_zap.b00
+-MM_GRAPHICS += a702_zap.b01
+-MM_GRAPHICS += a702_zap.b02
+-MM_GRAPHICS += a702_zap.elf
+-MM_GRAPHICS += a702_zap.mdt
+-MM_GRAPHICS += a612_rgmu.bin
+-MM_GRAPHICS += a612_zap.b00
+-MM_GRAPHICS += a612_zap.b01
+-MM_GRAPHICS += a612_zap.b02
+-MM_GRAPHICS += a612_zap.elf
+-MM_GRAPHICS += a612_zap.mdt
+ MM_GRAPHICS += eglsubAndroid
+ MM_GRAPHICS += eglSubDriverAndroid
+ MM_GRAPHICS += gpu_dcvsd
+-- 
+2.30.2
+
